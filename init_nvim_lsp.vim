@@ -9,6 +9,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'caenrique/nvim-toggle-terminal'
+Plug 'rust-lang/rust.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
@@ -60,9 +61,12 @@ set noswapfile               " not 2 generate *.sqp file by autowrite/autoread
 "set undofile
 
 " ------------------ Line Commment/Uncomment Toggling -------------------------- 
-autocmd FileType c,cpp,java       let b:comment_leader = '//'
-autocmd FileType sh,python        let b:comment_leader = '#'
-autocmd FileType vim              let b:comment_leader = '"'
+augroup toggle_comment
+   autocmd!
+   autocmd FileType c,cpp,java       let b:comment_leader = '//'
+   autocmd FileType sh,python        let b:comment_leader = '#'
+   autocmd FileType vim              let b:comment_leader = '"'
+augroup END
 
 function! CommentToggle()
     execute ':silent! s/\([^ ]\)/' . escape(b:comment_leader,'\/') . ' \1/'
@@ -99,10 +103,11 @@ set wildmenu
 
 " ------------------------- Colorscheme Customization --------------------------
 set termguicolors
-autocmd vimenter * ++nested colorscheme gruvbox
 set background=dark
-let g:gruvbox_invert_selection = '0'
+" let g:gruvbox_invert_selection = '0'
 let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_improved_warnings=1
+colorscheme gruvbox
 
 " --------------------------------- NERDTree Customization ---------------------
 nnoremap <leader>a :NERDTreeToggle<CR> 
@@ -110,15 +115,18 @@ let g:NERDTreeMinimalUI = 1
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeIgnore = ['\.git$[[dir]]', '\node_modules$[[dir]]', '\.sass-cache$']
-autocmd StdinReadPre * let s:std_in = 1 
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif 
-" Exit Vim if NERDTree is the only window left.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+augroup custom_nerdtree
+   autocmd!
+   autocmd StdinReadPre * let s:std_in = 1 
+   autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif 
+   "Exit Vim if NERDTree is the only window left.
+   autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+augroup END
 
 
 " -----------------------------AirLine Line Customization------------------------
 let g:airline_section_y=''
-let g:airline_symbols_ascii = 1
+"let g:airline_symbols_ascii = 1
 let g:airline_skip_empty_sections = 1
 let g:airline_focuslost_inactive = 1
 let g:airline_extensions = ['branch', 'tabline' ]
@@ -159,6 +167,13 @@ augroup END
 " Then Type exit or pres <Ctrl+E>
  
 " -------------------------------Language  Customization-----------------------------
+let g:python3_host_prog = 'C:/Users/User/AppData/Local/Programs/Python/Python38-32'
+autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
+autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 1000)
+let g:syntastic_rust_checkers = ['cargo']
+let g:rustfmt_autosave = 1
+let g:rust_fold = 1
+let g:rust_recommended_style = 1
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 lua << EOF
    vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -170,32 +185,28 @@ lua << EOF
      }
    )
    local nvim_lsp = require'lspconfig'
-   local nvim_command = vim.api.nvim_command
-   local on_attach = function(client)
+   local onattach = function(client)
        require'completion'.on_attach(client)
-       nvim_command('autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()')
    end
    nvim_lsp.pyls.setup({
-       on_attach=on_attach,
+       on_attach=onattach
    })
    nvim_lsp.vimls.setup({
-       on_attach=on_attach,
+       on_attach=onattach
    })
    nvim_lsp.rust_analyzer.setup({
-       on_attach=on_attach,
-       settings = {
-           ["rust-analyzer"] = {
-               assist = {
-                   importMergeBehavior = "last",
-                   importPrefix = "by_self",
-               },
-               cargo = {
-                   loadOutDirsFromCheck = true
-               },
-               procMacro = {
-                   enable = true
-               },
-           }
-       }
+       on_attach=onattach
    })
 EOF
+set updatetime=300
+" Show diagnostic popup on cursor hover
+augroup nvim_diagnostics 
+	autocmd!
+    autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+augroup END
+
+
+call sign_define("LspDiagnosticsSignError", {"text" : "e", "numhl" : "LspDiagnosticsDefaultError"})
+call sign_define("LspDiagnosticsSignWarning", {"text" : "!", "numhl" : "LspDiagnosticsDefaultWarning"})
+call sign_define("LspDiagnosticsSignInformation", {"text" : "i", "numhl" : "LspDiagnosticsDefaultInformation"})
+call sign_define("LspDiagnosticsSignHint", {"text" : "H", "numhl" : "LspDiagnosticsDefaultHint"})

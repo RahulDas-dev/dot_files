@@ -1,6 +1,6 @@
-![neovim](https://www.vectorlogo.zone/logos/neovimio/neovimio-ar21.svg)
 
-# This Repo Contain some basic Dot files , Like init.vim/.vimrc bash Prompt.sh 
+
+# This Repo Contain ![neovim](https://www.vectorlogo.zone/logos/neovimio/neovimio-ar21.svg) config files 
 
 ### After Cloning the repo , Kinldy do the following 
 * copy the init.vim, coc-settings.json to $HOME/.config/nvim directory 

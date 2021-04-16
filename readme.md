@@ -1,6 +1,6 @@
 
-
-# This Repo Contain ![neovim](https://www.vectorlogo.zone/logos/neovimio/neovimio-ar21.svg) config files 
+![neovim](https://www.vectorlogo.zone/logos/neovimio/neovimio-ar21.svg)
+# This Repo Contain neovim config files 
 
 ### After Cloning the repo , Kinldy do the following 
 * copy the init.vim, coc-settings.json to $HOME/.config/nvim directory 
@@ -10,7 +10,7 @@
 * Install  [nerd font](https://github.com/ryanoasis/nerd-fonts#font-installation) , or use directly download from the [nerd fornt release page](https://github.com/ryanoasis/nerd-fonts/releases) , take **DejaVuSansMono.zip**
 * change the line no 178 in init.vim ```let g:python3_host_prog = '/usr/bin/python3'``` set proper value for the Python Path
 * Install coc plugins using command 
-    1. ``` :CocInstall coc-explorer```
-    2. ``` :CocInstall coc-json coc-tsserver ```
-    3. ``` :CocInstall coc-python coc-pyright ```
+    a. ``` :CocInstall coc-explorer```
+    b. ``` :CocInstall coc-json coc-tsserver ```
+    c. ``` :CocInstall coc-python coc-pyright ```
 

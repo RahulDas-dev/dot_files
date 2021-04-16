@@ -10,7 +10,7 @@
 * Install  [nerd font](https://github.com/ryanoasis/nerd-fonts#font-installation) , or use directly download from the [nerd fornt release page](https://github.com/ryanoasis/nerd-fonts/releases) , take **DejaVuSansMono.zip**
 * change the line no 178 in init.vim ```let g:python3_host_prog = '/usr/bin/python3'``` set proper value for the Python Path
 * Install coc plugins using command 
-    a. ``` :CocInstall coc-explorer```
-    b. ``` :CocInstall coc-json coc-tsserver ```
-    c. ``` :CocInstall coc-python coc-pyright ```
+    * ``` :CocInstall coc-explorer```
+    * ``` :CocInstall coc-json coc-tsserver ```
+    * ``` :CocInstall coc-python coc-pyright ```
 

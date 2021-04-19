@@ -182,6 +182,10 @@ augroup python_cmds
     autocmd BufNewFile,BufRead *.py setlocal expandtab autoindent tabstop=4 shiftwidth=4
 augroup END
 
+" ------------------------------------ Nodejs Support --------------------------
+let g:node_host_prog = '/home/rahul/.nvm/versions/node/v14.16.1/bin/node'
+
+
 " ------------------------------------ Rust Support-----------------------------
 let g:syntastic_rust_checkers = ['cargo']
 let g:rustfmt_autosave = 1

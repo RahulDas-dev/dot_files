@@ -20,9 +20,7 @@
 
 
 * change the line no 178 in init.vim ```let g:python3_host_prog = '/usr/bin/python3'``` set proper value for the Python Path .
-* install python neovim Support ``` python3 -m pip install --user --upgrade pynvim```
-
-* change the line no 178 in init.vim ```let g:python3_host_prog = '/usr/bin/python3'``` set proper value for the Python Path .
+* install python neovim Support ``` python3 -m pip install --user --upgrade pynvim neovim```
 
 * install node support using ```npm install -g neovim```
 

@@ -24,7 +24,9 @@
 
 * change the line no 178 in init.vim ```let g:python3_host_prog = '/usr/bin/python3'``` set proper value for the Python Path .
 
-* change line no 189  ```let g:node_host_prog = '/home/rahul/.nvm/versions/node/v14.16.1/bin/node```
 * install node support using ```npm install -g neovim```
 
+* close the nvim and current terminal
+
+* open a new terminal open nvim run :checkhealth
 

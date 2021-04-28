@@ -3,11 +3,11 @@
 # This Repo Contain neovim config files 
 
 ### First things first
-* Install NVM + Node , Kindly follow the installation [instruction](https://gist.github.com/d2s/372b5943bce17b964a79#file-installing-node-with-nvm-md)
+* Install ```NVM``` & ```Node``` , Kindly follow the installation [instruction](https://gist.github.com/d2s/372b5943bce17b964a79#file-installing-node-with-nvm-md)
  
 
 ### After Cloning the repo, Kinldy do the following changes
-* copy the init.vim, coc-settings.json to ```$HOME/.config/nvim``` directory
+* copy the ```init.vim```, ```coc-settings.json``` to ```$HOME/.config/nvim``` directory
 
 * Then install the [vimplug](https://github.com/junegunn/vim-plug)
 

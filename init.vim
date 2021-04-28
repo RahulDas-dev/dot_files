@@ -183,7 +183,7 @@ augroup python_cmds
 augroup END
 
 " ------------------------------------ Nodejs Support --------------------------
-let g:node_host_prog = '/home/rahul/.nvm/versions/node/v14.16.1/bin/node'
+" let g:node_host_prog = '/home/rahul/.nvm/versions/node/v14.16.1/bin/node'
 
 
 " ------------------------------------ Rust Support-----------------------------
@@ -197,3 +197,6 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 " ------------------------------------ COC Customization-----------------------------
 set updatetime=300
 set hidden
+let g:coc_global_extensions = ['coc-json', 'coc-git','coc-css','coc-tsserver','coc-eslint','coc-html',
+            \'coc-python','coc-pyright','coc-explorer','coc-prettier','coc-diagnostic']
+
